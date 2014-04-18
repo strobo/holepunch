@@ -1,5 +1,5 @@
 Holepunch
-----------
+=========
 UDP hole punching is one of the NAT-traversal technique. So I implemented simple NAT-traversal application using UDP hole punching for my practice.
 If you want to know more infomation about UDP hole punching, Please see [wikipedia](http://en.wikipedia.org/wiki/UDP_hole_punching)
 
@@ -42,7 +42,6 @@ Usage: holepunch server <port>
 ```
 - Port is optional.
 - Server's default listening port is 60000.
-- Node's default listening port is 60002.
 - Communicate with the node to node, if matches the &lt;key&gt;.
 
 

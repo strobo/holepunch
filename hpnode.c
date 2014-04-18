@@ -19,7 +19,6 @@
 #include <event2/event.h>
 
 #define HP_SERVER_DEFAULT_PORT "60000"
-#define HP_NODE_DEFAULT_PORT "60002"
 
 /* from ping.c */
 /*
@@ -262,7 +261,7 @@ int runNode(char *serverAddress, char *key) {
 		port = HP_SERVER_DEFAULT_PORT;
 	}
 
-	res = getaddrinfo(NULL, HP_NODE_DEFAULT_PORT, &hints, &local);
+	res = getaddrinfo(NULL, "0", &hints, &local);
 	if(res != 0) {
 		ERR("getaddrinfo local");
 		ERR("getaddrinfo: %s\n", gai_strerror(res));
@@ -276,10 +275,6 @@ int runNode(char *serverAddress, char *key) {
 		exit(EXIT_FAILURE);
 	}
 
-	printf("local: %s:%d\n",
-			inet_ntoa(((struct sockaddr_in *)(local->ai_addr))->sin_addr),
-			ntohs(((struct sockaddr_in *)(local->ai_addr))->sin_port)
-		  );
 	printf("remote: %s(%s):%d\n",
 			domain,
 			inet_ntoa(((struct sockaddr_in *)(remote->ai_addr))->sin_addr),

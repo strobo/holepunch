@@ -16,6 +16,8 @@
 
 #include <event2/event.h>
 
+#define HP_SERVER_DEFAULT_PORT "60000"
+
 void on_server_recv(int fd, short event, void *arg) {
 	uint32_t sessionID;
 	struct sockaddr addr;
@@ -160,7 +162,6 @@ void on_server_recv(int fd, short event, void *arg) {
 		perror("recvfrom");
 	}
 }
-#define HP_SERVER_DEFAULT_PORT "60000"
 
 
 int runServer(char *port) {
