@@ -140,6 +140,7 @@ void on_node_recv(int fd, short event, void *arg) {
 						cPacket->sessionID = nCtx->sessionID;
 						cPacket->keyLength = 0;
 						sendto(fd, cPacket, HP_PacketLength(cPacket), 0, &nCtx->matchingServerAddress, sizeof(struct sockaddr));
+						free(cPacket);
 						nCtx->isConnected = 1;
 					} else {
 						tp = (struct timeval *)HP_GetTvPtr(packet);
@@ -294,6 +295,7 @@ int runNode(char *serverAddress, char *key) {
 	/* Send a HP_Request */
 	HP_Packet *packet = HP_PacketAllocWithKey(key);
 	sendto(nCtx->sock, packet, HP_PacketLength(packet), 0, (struct sockaddr *)remote->ai_addr, sizeof(struct sockaddr));
+	free(packet);
 
 	/* store some infomations to HPNodeContext */
 	memcpy(&nCtx->matchingServerAddress, remote->ai_addr, sizeof(struct sockaddr));
